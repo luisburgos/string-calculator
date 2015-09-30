@@ -46,4 +46,9 @@ public class StringCalculatorTest {
         assertEquals(1, stringCalculator.add("1,\n"));
     }
 
+    @Test
+    public void input_token_delimiter_n_1_delimiter_2_Return_3(){
+        assertEquals(3, stringCalculator.add("//; \n 1; 2"));
+    }
+
 }
