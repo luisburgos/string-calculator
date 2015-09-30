@@ -6,6 +6,9 @@ public class StringCalculator {
     public int add(String numbers){
         int sumNumbers = 0;
 
+        if(numbers.isEmpty()){
+            return sumNumbers;
+        }
 
         return sumNumbers;
     }
