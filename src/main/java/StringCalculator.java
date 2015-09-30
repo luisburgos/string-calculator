@@ -19,7 +19,12 @@ public class StringCalculator {
             return sumNumbers = 1;
         }
 
+        if(numbers.contains("\n")){
+            numbers = numbers.replace("\n", ",");
+        }
+
         numbersList = Arrays.asList(numbers.split("\\s*,\\s*"));
+
         for(String number : numbersList){
             sumNumbers += Integer.parseInt(number);
         }

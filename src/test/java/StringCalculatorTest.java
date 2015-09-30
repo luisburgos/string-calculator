@@ -36,4 +36,9 @@ public class StringCalculatorTest {
         assertEquals(46, stringCalculator.add("1, 2, 3, 40"));
     }
 
+    @Test
+    public void input_1_2_3_Returns_6(){
+        assertEquals(6, stringCalculator.add("1 \n2, 3"));
+    }
+
 }
