@@ -20,4 +20,10 @@ public class StringCalculatorTest {
     public void inputEmptyStringReturns0(){
         assertEquals(0, stringCalculator.add(""));
     }
+
+    @Test
+    public void input1Returns0(){
+        assertEquals(1, stringCalculator.add("1"));
+    }
+
 }
