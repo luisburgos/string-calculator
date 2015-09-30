@@ -20,7 +20,11 @@ public class StringCalculator {
         }
 
         if(numbers.contains("\n")){
-            numbers = numbers.replace("\n", ",");
+            if(numbers.indexOf("\n") == numbers.length()){
+                numbers = numbers.replace("\n", "");
+            }else{
+                numbers = numbers.replace("\n", ",");
+            }
         }
 
         numbersList = Arrays.asList(numbers.split("\\s*,\\s*"));

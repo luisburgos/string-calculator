@@ -37,8 +37,13 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void input_1_2_3_Returns_6(){
+    public void input_1_n_2_3_Returns_6(){
         assertEquals(6, stringCalculator.add("1 \n2, 3"));
+    }
+
+    @Test
+    public void input_1_n_Returns_1(){
+        assertEquals(1, stringCalculator.add("1,\n"));
     }
 
 }
