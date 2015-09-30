@@ -17,13 +17,23 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void inputEmptyStringReturns0(){
+    public void input_EmptyString_Returns_0(){
         assertEquals(0, stringCalculator.add(""));
     }
 
     @Test
-    public void input1Returns0(){
+    public void input_1_Returns_0(){
         assertEquals(1, stringCalculator.add("1"));
+    }
+
+    @Test
+    public void input_1_2_Returns_3(){
+        assertEquals(3, stringCalculator.add("1, 2"));
+    }
+
+    @Test
+    public void input_1_2_3_40_Returns_46(){
+        assertEquals(46, stringCalculator.add("1, 2, 3, 40"));
     }
 
 }
