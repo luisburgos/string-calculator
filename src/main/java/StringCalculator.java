@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class StringCalculator {
 
-    public int add(String numbers) {
+    public int add(String numbers) throws NegativesNotAllowed {
 
         String tokenToSplit = "\\s*,\\s*";
         List<String> numbersList;
@@ -56,11 +56,7 @@ public class StringCalculator {
         }
 
         if(!errorNumbers.isEmpty()){
-            try {
-                throw new NegativesNotAllowed(errorNumbers);
-            } catch (Exception negativesNotAllowed) {
-                negativesNotAllowed.printStackTrace();
-            }
+            throw new NegativesNotAllowed(errorNumbers);
         }
 
         return sumNumbers;
