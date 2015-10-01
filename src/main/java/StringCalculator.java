@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class StringCalculator {
 
-    public int add(String numbers){
+    public int add(String numbers) {
 
         String tokenToSplit = "\\s*,\\s*";
         List<String> numbersList;
@@ -44,8 +44,23 @@ public class StringCalculator {
 
         numbersList = Arrays.asList(numbers.split(tokenToSplit));
 
+        String errorNumbers = "";
         for(String number : numbersList){
-            sumNumbers += Integer.parseInt(number);
+            int currentNumberToAdd = Integer.parseInt(number);
+
+            if(!(currentNumberToAdd < 0)){
+                sumNumbers += currentNumberToAdd;
+            }else{
+                errorNumbers += number;
+            }
+        }
+
+        if(!errorNumbers.isEmpty()){
+            try {
+                throw new NegativesNotAllowed(errorNumbers);
+            } catch (Exception negativesNotAllowed) {
+                negativesNotAllowed.printStackTrace();
+            }
         }
 
         return sumNumbers;

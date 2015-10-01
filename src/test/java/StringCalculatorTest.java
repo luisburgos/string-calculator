@@ -16,6 +16,7 @@ public class StringCalculatorTest {
         stringCalculator = new StringCalculator();
     }
 
+    /*
     @Test
     public void input_EmptyString_Returns_0(){
         assertEquals(0, stringCalculator.add(""));
@@ -49,6 +50,12 @@ public class StringCalculatorTest {
     @Test
     public void input_token_delimiter_n_1_delimiter_2_Return_3(){
         assertEquals(3, stringCalculator.add("//; \n 1; 2"));
+    }
+    */
+
+    @Test (expected = NegativesNotAllowed.class)
+    public void input_negatives_Return_NegativeNotAllowed(){
+        stringCalculator.add("-1, -2, -3");
     }
 
 }
