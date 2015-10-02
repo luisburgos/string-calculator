@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -6,43 +7,22 @@ import java.util.List;
  */
 public class StringCalculator {
 
-    public int add(String numbers) throws NegativesNotAllowed {
+    private String defaultToken = "\\s*,\\s*";
+    private List<String> numbersList;
 
-        String tokenToSplit = "\\s*,\\s*";
-        List<String> numbersList;
+    public int add(String numbersToSum) throws NegativesNotAllowed {
+
         int sumNumbers = 0;
 
-        if(numbers.isEmpty()){
+        if(numbersToSum.isEmpty()){
             return sumNumbers;
+        }else if(numbersToSum.contains("//")) {
+            numbersToSum = getNumbersWithoutNewToken(numbersToSum);
+        }else if(numbersToSum.contains("\n")){
+            numbersToSum = getNumbersWithoutLineBreak(numbersToSum);
         }
 
-        if(numbers.equals("1")){
-            return sumNumbers = 1;
-        }
-
-        if(numbers.contains("//")){
-            numbers = numbers.replace("//", "");
-
-            int delimiterBeginIndex = numbers.indexOf("//") + 1;
-            String delimiterInNumbersString = numbers.substring(delimiterBeginIndex, delimiterBeginIndex + 1);
-
-            tokenToSplit = delimiterInNumbersString;
-
-            numbers = numbers.substring(delimiterBeginIndex + 1);
-            numbers = numbers.replace("\n", "");
-            numbers = numbers.replaceAll(" ", "");
-
-        }
-
-        if(numbers.contains("\n")){
-            if(numbers.indexOf("\n") == numbers.length()){
-                numbers = numbers.replace("\n", "");
-            }else{
-                numbers = numbers.replace("\n", ",");
-            }
-        }
-
-        numbersList = Arrays.asList(numbers.split(tokenToSplit));
+        numbersList = Arrays.asList(numbersToSum.split(defaultToken));
 
         String errorNumbers = "";
         for(String number : numbersList){
@@ -60,6 +40,55 @@ public class StringCalculator {
         }
 
         return sumNumbers;
+    }
+
+    private List<Integer> getListOfNumbersFromString(String numbersToSum, String defaultToken) {
+        List<String> stringNumbersList = Arrays.asList(numbersToSum.split(defaultToken));
+        List<Integer> integerNumbersList = new ArrayList<Integer>();
+
+        for(String number : stringNumbersList){
+            int currentNumberToAdd = Integer.parseInt(number);
+            integerNumbersList.add(currentNumberToAdd);
+        }
+
+        return integerNumbersList;
+    }
+
+    private int getNumbersSumFromString(String numbersToSum) {
+        return 0;
+    }
+
+    private String getNumbersWithoutLineBreak(String numbersToSum) {
+        String numbersWithoutLineBreak = numbersToSum;
+
+        if(isBreakLineAtEndOfString(numbersWithoutLineBreak)){
+            numbersWithoutLineBreak = numbersWithoutLineBreak.replace("\n", "");
+        }else{
+            numbersWithoutLineBreak = numbersWithoutLineBreak.replace("\n", ",");
+        }
+
+        return numbersWithoutLineBreak;
+    }
+
+    private String getNumbersWithoutNewToken(String numbersToSum) {
+        String numbersWithoutNewToken = numbersToSum;
+
+        numbersWithoutNewToken = numbersWithoutNewToken.replace("//", "");
+        int delimiterBeginIndex = numbersWithoutNewToken.indexOf("//") + 1;
+        String newDefaultToken = numbersWithoutNewToken.substring(delimiterBeginIndex, delimiterBeginIndex + 1);
+        defaultToken = newDefaultToken;
+        numbersWithoutNewToken = numbersWithoutNewToken.substring(delimiterBeginIndex + 1);
+        numbersWithoutNewToken = numbersWithoutNewToken.replaceAll(" ", "");
+        numbersWithoutNewToken = numbersWithoutNewToken.replace("\n", "");
+
+        return numbersWithoutNewToken;
+    }
+
+    private boolean isBreakLineAtEndOfString(String numbersToSum) {
+        if(numbersToSum.indexOf("\n") == numbersToSum.length()){
+            return true;
+        }
+        return false;
     }
 
 }
